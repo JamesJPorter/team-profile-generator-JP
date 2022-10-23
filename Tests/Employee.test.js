@@ -49,7 +49,8 @@ it ('Should get the name via getName()', () => {
 it ('Should get the Id via getId()', () => {
     // Arrange 
     const testId = '1';
-    const newEmp = new Employee('James', testId);
+    const newEmp = new Employee();
+    newEmp.id = testId
     // Act 
     const empId = newEmp.getId();
     // Assert 
@@ -59,7 +60,8 @@ it ('Should get the Id via getId()', () => {
 it ('Should get email via getEmail()', () => {
     // Arrange 
     const testEmail = 'porterjjames@gmail.com'; 
-    const newEmp = new Employee('James', '1', testEmail)
+    const newEmp = new Employee()
+    newEmp.email = testEmail
     // Act 
     const empEmail = newEmp.getEmail()
     // Assert 
