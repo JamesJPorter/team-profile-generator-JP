@@ -33,5 +33,13 @@ function generateHTML(data) {
   // File should be written to dist folder
 }
 
+function writeToFile(fileName, data){
+    const myTeam = generateHTML(data)
+    fs.writeFile(fileName, myTeam, (error) => {
+        error ? console.log(error) : console.log("success!")
+    })
+}
+
+module.exports = writeToFile;
 module.exports = generateHTML;
 

@@ -4,24 +4,11 @@ const Manager = require("./lib/Manager");
 const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const generateHTML = require("./src/generateHTML");
+const writeToFile = require('./src/generateHTML')
 
 function init() {
-  employees = [];
+    console.log(employees)
   userChoice();
-  if (userChoice == "yes") {
-    typeOfEmployee();
-  }
-  if (typeOfEmployee == "manager") {
-    getManager();
-  } else if (typeOfEmployee == "intern") {
-    getIntern();
-  } else if (typeOfEmployee == "engineer") {
-    getEngineer();
-  } else generateHTML(employees);
-  // Ask if the user wants to add employee
-  // if yes, ask what kind of employee
-  // if no, then generate HTML
-  // After HTML is generated then
 }
 
 function getManager() {
@@ -48,35 +35,118 @@ function getManager() {
     },
     {
       type: "list",
-      name: "new team member",
+      name: "newTeamMember",
       message: "Would you like to add another team member?",
       choices: ["yes", "no"],
-      filter(val){return val.toLowerCase}
+      filter(val) {
+        return val.toLowerCase;
+      },
     },
   ];
   inquirer.prompt(managerQuestions).then((data) => {
-    const newManager = new Manager(data);
-    console.log(newManager);
+    const newManager = new Manager(
+      data.name,
+      data.id,
+      data.email,
+      data.officeNumber
+    );
     employees.push(newManager);
-    console.log(employees);
+    if (data.newTeamMember == "yes") {
+      userChoice();
+    } else writeToFile(myTeam.html, employees);
   });
-  //At end of function return to init
-  init();
 }
 
 function getIntern() {
-  //At end of function return to init
+  const internQuestions = [
+    {
+      type: "input",
+      name: "name",
+      message: "What is the name of your intern?",
+    },
+    {
+      type: "input",
+      name: "id",
+      message: "Please enter your team intern's Employee ID:",
+    },
+    {
+      type: "input",
+      name: "email",
+      message: "Please enter your team intern's email address:",
+    },
+    {
+      type: "input",
+      name: "school",
+      message: "Please enter your team intern's school name:",
+    },
+    {
+      type: "list",
+      name: "newTeamMember",
+      message: "Would you like to add another team member?",
+      choices: ["yes", "no"],
+      filter(val) {
+        return val.toLowerCase;
+      },
+    },
+  ];
+  inquirer.prompt(internQuestions).then((data) => {
+    const newIntern = new Intern(data.name, data.id, data.email, data.school);
+    employees.push(newIntern);
+    if (data.newTeamMember == "yes") {
+      userChoice();
+    } else writeToFile(myTeam.html, employees);
+  });
 }
 
 function getEngineer() {
-  //At end of function return to init
+    const engineerQuestions = [
+        {
+          type: "input",
+          name: "name",
+          message: "What is the name of your engineer?",
+        },
+        {
+          type: "input",
+          name: "id",
+          message: "Please enter your team engineer's Employee ID:",
+        },
+        {
+          type: "input",
+          name: "email",
+          message: "Please enter your team engineer's email address:",
+        },
+        {
+          type: "input",
+          name: "gitHub",
+          message: "Please enter your team engineer's github:",
+        },
+        {
+          type: "list",
+          name: "newTeamMember",
+          message: "Would you like to add another team member?",
+          choices: ["yes", "no"],
+          filter(val) {
+            return val.toLowerCase;
+          },
+        },
+      ];
+      inquirer.prompt(engineerQuestions).then((data) => {
+        const newEngineer = new Engineer(data.name, data.id, data.email, data.gitHub);
+        let newTeamMember = data.newTeamMember
+        console.log(newTeamMember)
+        employees.push(newEngineer);
+        console.log(employees)
+        if (newTeamMember == "yes") {
+          userChoice();
+        } else writeToFile('myTeam.html', employees);
+      });
 }
 
 function userChoice() {
   const userChoice = [
     {
       type: "list",
-      name: "addMember",
+      name: "newTeamMember",
       message: "Would you like to add new team member?",
       choices: ["yes", "no"],
       filter(val) {
@@ -85,8 +155,10 @@ function userChoice() {
     },
   ];
   inquirer.prompt(userChoice).then((data) => {
-    console.log(data.addMember)
-    return data.addMember;
+    console.log(data.newTeamMember);
+    if (data.newTeamMember == "yes") {
+      typeOfEmployee();
+    } else writeToFile(myTeam.html, employees);
   });
 }
 
@@ -102,7 +174,13 @@ function typeOfEmployee() {
     },
   ];
   inquirer.prompt(employeeType).then((data) => {
-    return data;
+    if (data.employeeType == "manager") {
+      getManager();
+    } else if (data.employeeType == "intern") {
+      getIntern();
+    } else if (data.employeeType == "engineer") {
+      getEngineer();
+    } else writeToFile(myTeam.html, employees);
   });
 }
 
