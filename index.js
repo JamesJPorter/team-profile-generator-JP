@@ -3,11 +3,9 @@ const Engineer = require("./lib/Engineer");
 const Manager = require("./lib/Manager");
 const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
-const generateHTML = require("./src/generateHTML");
 const writeToFile = require('./src/generateHTML')
 
 function init() {
-    console.log(employees)
   userChoice();
 }
 
@@ -33,15 +31,6 @@ function getManager() {
       name: "officeNumber",
       message: "Please enter your team managers Office number:",
     },
-    {
-      type: "list",
-      name: "newTeamMember",
-      message: "Would you like to add another team member?",
-      choices: ["yes", "no"],
-      filter(val) {
-        return val.toLowerCase;
-      },
-    },
   ];
   inquirer.prompt(managerQuestions).then((data) => {
     const newManager = new Manager(
@@ -51,9 +40,7 @@ function getManager() {
       data.officeNumber
     );
     employees.push(newManager);
-    if (data.newTeamMember == "yes") {
       userChoice();
-    } else writeToFile(myTeam.html, employees);
   });
 }
 
@@ -79,22 +66,11 @@ function getIntern() {
       name: "school",
       message: "Please enter your team intern's school name:",
     },
-    {
-      type: "list",
-      name: "newTeamMember",
-      message: "Would you like to add another team member?",
-      choices: ["yes", "no"],
-      filter(val) {
-        return val.toLowerCase;
-      },
-    },
   ];
   inquirer.prompt(internQuestions).then((data) => {
     const newIntern = new Intern(data.name, data.id, data.email, data.school);
     employees.push(newIntern);
-    if (data.newTeamMember == "yes") {
       userChoice();
-    } else writeToFile(myTeam.html, employees);
   });
 }
 
@@ -120,15 +96,6 @@ function getEngineer() {
           name: "gitHub",
           message: "Please enter your team engineer's github:",
         },
-        {
-          type: "list",
-          name: "newTeamMember",
-          message: "Would you like to add another team member?",
-          choices: ["yes", "no"],
-          filter(val) {
-            return val.toLowerCase;
-          },
-        },
       ];
       inquirer.prompt(engineerQuestions).then((data) => {
         const newEngineer = new Engineer(data.name, data.id, data.email, data.gitHub);
@@ -136,9 +103,7 @@ function getEngineer() {
         console.log(newTeamMember)
         employees.push(newEngineer);
         console.log(employees)
-        if (newTeamMember == "yes") {
           userChoice();
-        } else writeToFile('myTeam.html', employees);
       });
 }
 
@@ -158,7 +123,7 @@ function userChoice() {
     console.log(data.newTeamMember);
     if (data.newTeamMember == "yes") {
       typeOfEmployee();
-    } else writeToFile(myTeam.html, employees);
+    } else writeToFile('myTeam.html', employees);
   });
 }
 
@@ -180,7 +145,7 @@ function typeOfEmployee() {
       getIntern();
     } else if (data.employeeType == "engineer") {
       getEngineer();
-    } else writeToFile(myTeam.html, employees);
+    } else writeToFile('myTeam.html', employees);
   });
 }
 
