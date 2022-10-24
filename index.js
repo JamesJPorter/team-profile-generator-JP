@@ -123,7 +123,7 @@ function userChoice() {
     console.log(data.newTeamMember);
     if (data.newTeamMember == "yes") {
       typeOfEmployee();
-    } else writeToFile('C:/Users/porte/bootcamp/Challenge-10-JP/dist/myTeam.html', employees);
+    } else writeToFile(__dirname + '/dist/myTeam.html', employees);
   });
 }
 
