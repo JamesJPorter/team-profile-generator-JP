@@ -17,36 +17,40 @@ function generateHTML(data) {
     <div class="jumbotron jumbotron-fluid">
     <div class="container">
     <h1 class="display-4">My Team</h1>
-  </div>
-</div>
+    </div>
+    </div>
     </header>
+    <div class="container-fluid d-flex justify-content-center">
         ${data.map((employee) => {
-          return `<div class="card" style="width: 18rem;">
-          <h5 class="card-title">${employee.name}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">${employee.getRole()}</h6>
-            <ul class="list-group list-group-flush">
+          return `<div class="card m-4" style="width: 18rem;">
+          <div class="card-header bg-primary">
+          <h5 class="card-title pl-3 pt-2 custom-h5">${employee.name}</h5>
+          <h6 class="custom-h6 card-subtitle mb-2 pl-3 pt-2">${employee.officeNumber ? `<i class="fa-solid fa-mug-hot"></i>` : ''} ${employee.getGithub ? `<i class="fa-sharp fa-solid fa-glasses"></i>` : ''} ${employee.getSchool ? `<i class="fa-solid fa-user-graduate"></i>` : ''} ${employee.getRole()}</h6>
+          </div>
+            <ul class="list-group list-group-flush mx-3 my-3 border bg-secondary">
               <li class="list-group-item">ID: ${employee.id}</li>
-              <li class="list-group-item">Email: <a href="${employee.email}">${
-            employee.email
-          }</a></li>
+              <li class="list-group-item px-2 pt-2">Email: <a href="mailto:${employee.email}">${employee.email}</a></li>
               ${
                 employee.getOfficeNumber
                   ? `<li class="list-group-item">Office Number: ${employee.getOfficeNumber()}</li>`
-                  : ``
+                  : ""
               }
               ${
                 employee.getGithub
-                  ? `<li class="list-group-item">GitHUb: <a href="${employee.getGithub()}">${employee.getGithub()}</a></li>`
-                  : ``
+                  ? `<li class="list-group-item">GitHub: <a href="${employee.getGithub()}">${employee.getGithub()}</a></li>`
+                  : ""
               }
               ${
                 employee.getSchool
                   ? `<li class="list-group-item">School: ${employee.getSchool()}</li>`
-                  : ``
+                  : ""
               }
             </ul>
           </div>`
         })}
+
+        </div>
+    <script src="https://kit.fontawesome.com/a147456aa8.js" crossorigin="anonymous"></script>    
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
