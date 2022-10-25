@@ -1,7 +1,7 @@
 const fs = require("fs");
 
 function generateHTML(data) {
-  console.log(data);
+  console.log(data)
   return `<!DOCTYPE html>
     <html lang="en">
     <head>
@@ -9,7 +9,7 @@ function generateHTML(data) {
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="./dist/style.css">
+        <link rel="stylesheet" href="style.css">
         <title>My Team</title>
     </head>
     <body>
@@ -29,7 +29,7 @@ function generateHTML(data) {
           </div>
             <ul class="list-group list-group-flush mx-3 my-3 border bg-secondary">
               <li class="list-group-item">ID: ${employee.id}</li>
-              <li class="list-group-item px-2 pt-2">Email: <a href="mailto:${employee.email}">${employee.email}</a></li>
+              <li class="list-group-item">Email: <a href="mailto:${employee.email}">${employee.email}</a></li>
               ${
                 employee.getOfficeNumber
                   ? `<li class="list-group-item">Office Number: ${employee.getOfficeNumber()}</li>`
@@ -47,7 +47,7 @@ function generateHTML(data) {
               }
             </ul>
           </div>`
-        })}
+        }).join('')}
 
         </div>
     <script src="https://kit.fontawesome.com/a147456aa8.js" crossorigin="anonymous"></script>    
