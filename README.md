@@ -19,6 +19,8 @@
   ## Usage 
   Following on from installation, eecuting "node index" in your terminal will initialize the app in your terminal. From here, proceed to answer all questions as desired. Once you are done answering questions, decline to add a new team member and your team will be created with an HTML file generated and saved to the dist folder within the main director. 
 
+For a video tutorial, visit the following link: https://drive.google.com/file/d/11zrbKm_pWK6sLNFAuLkpo3q5ckaeMA-S/view
+
   ## License 
   Licensed udner the [MIT](https://opensource.org/licenses/MIT) license
 
